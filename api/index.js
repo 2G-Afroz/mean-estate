@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'
+import authRouter from './routes/auth.route.js'
 
 dotenv.config();
 
@@ -12,9 +13,11 @@ async function main() {
 }
 
 const app = express();
+app.use(express.json());
 
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
 });
 
-app.use("/", userRouter);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
