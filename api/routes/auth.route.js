@@ -10,7 +10,7 @@ router.post("/signup", async (req, res, next) => {
 	const user = new User({username, email, password: hashedPass});
 	try {
 		await user.save();
-		res.status(201).json("User created successfully" + user);
+		res.status(201).json("User created successfully");
 	}
 	catch(err) {
 		next(err);

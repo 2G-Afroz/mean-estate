@@ -1,9 +1,9 @@
-POST http://localhost:3000/auth/signup
+POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-	"username": "Hashd",
-	"email": "has@gmail.com",
+	"username": "Hashdoksdf",
+	"email": "hasok@gmail.com",
 	"password": "hash 1"
 }
 
