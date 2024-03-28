@@ -2,9 +2,17 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-	"username": "Hashdoksdf",
-	"email": "hasok@gmail.com",
-	"password": "hash 1"
+	"username": "test11",
+	"email": "test11@gmail.com",
+	"password": "test11123"
 }
 
 ###
+
+POST http://localhost:3000/api/auth/signin
+Content-Type: application/json
+
+{
+	"email": "test11@gmail.com",
+	"password": "test11123"
+}
