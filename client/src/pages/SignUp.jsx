@@ -11,8 +11,6 @@ export default function SignUp() {
   const [ loading, setLoading ] = useState(null);
   const navigate = useNavigate();
 
-  console.log(formData);
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
