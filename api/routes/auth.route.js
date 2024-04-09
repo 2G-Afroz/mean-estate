@@ -33,9 +33,39 @@ router.post("/signin", async (req, res, next) => {
 		.cookie("access_token", token, {httpOnly: true})
 		.status(200)
 		.json(user);
-
 	}
 	catch(err) {
+		next(err);
+	}
+});
+
+router.post("/google", async (req, res, next) => {
+	const { name, email, photo } = req.body;
+	try {
+		const user = await User.findOne({email});
+		if(user) {
+			const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+			const { password: pass, ...userData } = user._doc;
+			res
+			.cookie("access_token", token, {httpOnly: true})
+			.status(200)
+			.json(userData);
+		}
+		else {
+			const generatedPass = Math.random().toString(36).slice(-8);
+			const hashedPass = bcryptjs.hashSync(generatedPass, 10);
+			const newUser = new User({username: name, email, password: hashedPass, avatar: photo});
+			newUser.save();
+			const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
+			const { password: pass, ...userData } = newUser._doc;
+			res
+			.cookie("access_token", token, {httpOnly: true})
+			.status(200)
+			.json(userData);
+		}
+	}
+	catch(err) {
+		console.error(err);
 		next(err);
 	}
 });
