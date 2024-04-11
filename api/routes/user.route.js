@@ -51,4 +51,14 @@ router.delete("/delete/:id", verifyToken, async (req, res, next) => {
 	}
 });
 
+router.get("/logout", (req, res) => {
+	try {
+		res.clearCookie("access_token");
+		res.status(200).json("User has been logged out.");
+	}
+	catch(err) {
+		next(err);
+	}
+});
+
 export default router;
