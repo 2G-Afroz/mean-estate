@@ -39,7 +39,7 @@ export default function Profile() {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setFilePer(Math.round(progress));
       },
-      (err) => {
+      () => {
         setFileUploadErr(true);
       },
       () => {

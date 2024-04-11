@@ -2,9 +2,9 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-	"username": "test11",
-	"email": "test11@gmail.com",
-	"password": "test11123"
+	"username": "afroz",
+	"email": "afroz@gmail.com",
+	"password": "afroz123"
 }
 
 ###
@@ -13,6 +13,15 @@ POST http://localhost:3000/api/auth/signin
 Content-Type: application/json
 
 {
-	"email": "test11@gmail.com",
-	"password": "test11123"
+	"email": "afroz@gmail.com",
+	"password": "afroz123"
+}
+
+###
+
+POST http://localhost:3000/api/user/update/6617bd043ae9698742254056
+Content-Type: application/json
+
+{
+	"username": "done"
 }
