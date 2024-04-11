@@ -8,6 +8,7 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { updateUserStart, updateUserSuccess, updateUserFailure } from "../redux/user/userSlice";
+import { deleteUserStart, deleteUserSuccess, deleteUserFailure } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
 export default function Profile() {
@@ -20,8 +21,6 @@ export default function Profile() {
 	const [fileSizeErr, setFileSizeErr] = useState(false);
   const [fileUploadErr, setFileUploadErr] = useState(false);
 	const [ updateSucess, setUpdateSuccess ] = useState(false);
-
-	console.log(formData);
 
   useEffect(() => {
     if (file) {
@@ -83,6 +82,27 @@ export default function Profile() {
 		catch(err) {
 			dispatch(updateUserFailure(err.message));
 		
+		}
+	}
+
+	const handleDeleteuser = async () => {
+		try {
+			dispatch(deleteUserStart());
+			const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+				method: "DELETE",
+			});
+
+			const data = await res.json();
+			if(data.success === false) {
+				dispatch(deleteUserFailure(data.message));
+				return;
+			}
+
+			dispatch(deleteUserSuccess(data));
+		}
+		catch(err) {
+			dispatch(deleteUserFailure(err.message));
+			console.log(err);
 		}
 	}
 
@@ -148,7 +168,7 @@ export default function Profile() {
         </button>
       </form>
       <div className="flex flex-row justify-between m-2">
-        <span className="text-red-700 cursor-pointer">Delete Account</span>
+        <span onClick={handleDeleteuser} className="text-red-700 cursor-pointer">Delete Account</span>
         <span className="text-red-700 cursor-pointer">Sign out</span>
       </div>
 			<p className="text-red-700">{error? error : ""}</p>
