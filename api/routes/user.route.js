@@ -2,6 +2,7 @@ import express from 'express';
 import { verifyToken } from '../utils/verifyUser.js';
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
+import bcryptjs from "bcryptjs";
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.post("/update/:id", verifyToken, async (req, res, next) => {
 	}
 	try {
 		if(req.body.password) {
-			req.body.password = bcrypt.hashSync(req.body.password, 10);
+			req.body.password = bcryptjs.hashSync(req.body.password, 10);
 		}
 
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, {

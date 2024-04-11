@@ -23,5 +23,5 @@ POST http://localhost:3000/api/user/update/6617bd043ae9698742254056
 Content-Type: application/json
 
 {
-	"username": "done"
+	"password": "afroz"
 }
