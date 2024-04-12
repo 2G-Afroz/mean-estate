@@ -28,3 +28,23 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/user/delete/6617bd043ae9698742254
+
+###
+POST http://localhost:3000/api/listing/create
+Content-Type: application/json
+
+{
+	"name": "Test",
+	"description": "Test",
+	"address": "Test",
+	"regularPrice": 80,
+	"discountedPrice": 70,
+	"bathrooms": 2,
+	"bedrooms": 2,
+	"furnished": true,
+	"parking": true,
+	"type": "Apartment",
+	"offer": true,
+	"imageUrls": ["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"],
+	"userRef": "6617bd043ae9698742254056"
+}
