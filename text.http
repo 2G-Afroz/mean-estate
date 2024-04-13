@@ -46,5 +46,8 @@ Content-Type: application/json
 	"type": "Apartment",
 	"offer": true,
 	"imageUrls": ["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"],
-	"userRef": "6617bd043ae9698742254056"
+	"userRef": "661a9171ab394ed1764e7680"
 }
+
+###
+GET http://localhost:3000/api/user/listings/661a9171ab394ed1764e7680
