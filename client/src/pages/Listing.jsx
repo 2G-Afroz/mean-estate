@@ -4,17 +4,21 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
+import { useSelector } from "react-redux";
 import "swiper/css/bundle";
 // Importing icons
 import { FaBath, FaChair, FaMapMarkerAlt, FaParking } from "react-icons/fa";
 import { FaBed } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 export default function Listing() {
+	const { currentUser } = useSelector((state) => state.user);
   SwiperCore.use([Navigation]);
   const params = useParams();
   const [listing, setListing] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+	const [contact, setContact] = useState(false);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -95,6 +99,14 @@ export default function Listing() {
 									<span>{listing.furnished ? "Furnished": "Not Furnished"}</span>
               </li>
             </ul>
+						{currentUser && currentUser._id !== listing.userRef && !contact &&(
+							<p onClick={() => {
+								setContact(true);
+							}} className="uppercase text-center p-3 bg-slate-700 rounded text-white mt-3">Contact landlord</p>
+						)}
+						{contact && (
+							<Contact listing={listing}/>
+						)}
           </div>
         </div>
       )}
