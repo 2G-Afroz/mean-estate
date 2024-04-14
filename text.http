@@ -34,7 +34,7 @@ POST http://localhost:3000/api/listing/create
 Content-Type: application/json
 
 {
-	"name": "Test",
+	"name": "Afroz New Test",
 	"description": "Test",
 	"address": "Test",
 	"regularPrice": 80,
@@ -51,3 +51,6 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/user/listings/661a9171ab394ed1764e7680
+
+###
+DELETE http://localhost:3000/api/listing/delete/661b62c9640dad0d5fa99767
