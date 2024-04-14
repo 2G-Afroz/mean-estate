@@ -58,4 +58,17 @@ router.post("/update/:id", verifyToken, async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+	try {
+		const listing = await Listing.findById(req.params.id);
+		if(!listing) {
+			return res.status(404).json("Listing not found.");
+		}
+		res.status(200).json(listing);
+	}
+	catch(err) {
+		next(err);
+	}
+});
+
 export default router;
