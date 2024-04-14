@@ -146,7 +146,7 @@ export default function CreateListing() {
 				return;
 			}
 
-			navigate(`/listings/${data._id}`);
+			navigate(`/listing/${data._id}`);
 		}
 		catch(err) {
 			setError(err.message);
