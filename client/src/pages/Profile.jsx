@@ -35,6 +35,8 @@ export default function Profile() {
   const [fileSizeErr, setFileSizeErr] = useState(false);
   const [fileUploadErr, setFileUploadErr] = useState(false);
   const [updateSucess, setUpdateSuccess] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
+  const [userListings, setUserListings] = useState([]);
 
   useEffect(() => {
     if (file) {
@@ -133,6 +135,23 @@ export default function Profile() {
     }
   };
 
+  const handleShowListings = async () => {
+    try {
+      setShowListingsError(false);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if(data.success === false) {
+        setShowListingsError(true);
+        return;
+      }
+      setUserListings(data);
+      console.log(data);
+    }
+    catch(err) {
+      setShowListingsError(true);
+    }
+  }
+
   return (
     <div className="p-3 mx-auto max-w-lg">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -220,6 +239,23 @@ export default function Profile() {
       <p className="text-green-700">
         {updateSucess ? "Updated Successfully." : ""}
       </p>
+      <button onClick={handleShowListings} className="text-green-700 w-full">Show Listings</button>
+      {userListings.length > 0 ? (
+        userListings.map((listing) => (
+          <div key={listing._id} className="border p-3 my-2 rounded-lg flex justify-between flex-row">
+            <Link to={`/listing/${listing._id}`}>
+            <div className="flex items-center gap-2">
+              <img src={listing.imageUrls[0]} alt="" className="w-20 h-20 object-contain" />
+              <p>{listing.name}</p>
+            </div>
+            </Link>
+            <div className="flex flex-col justify-center gap-2">
+              <button className="text-green-700">Edit</button>
+              <button className="text-red-700">Delete</button>
+          </div>
+          </div>
+        ))) : showListingsError ? <p className="text-red-700">Failed to load listings.</p> : ""
+      }
     </div>
   );
 }
