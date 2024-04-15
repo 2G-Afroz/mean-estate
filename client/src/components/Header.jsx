@@ -7,7 +7,6 @@ export default function Header() {
 
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(searchTerm);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +42,7 @@ export default function Header() {
             className="bg-transparent focus:outline-none w-24 sm:w-64"
             type="text"
             placeholder="Search..."
-            value={searchTerm}
+            value={searchTerm ? searchTerm : ""}
           />
           <button>
             <FaSearch className="text-slate-600" />

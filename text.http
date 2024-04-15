@@ -67,4 +67,4 @@ Content-Type: application/json
 GET http://localhost:3000/api/listing/661b9cd58665a7d7e0c878ee
 
 ###
-GET http://localhost:3000/api/listing?searchTerm=vi
+GET http://localhost:3000/api/listing
