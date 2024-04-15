@@ -78,8 +78,8 @@ router.get("/listings/:id", verifyToken, async (req, res, next) => {
 router.get("/:id", verifyToken, async (req, res, next) => {
 	try {
 		const user = await User.findById(req.params.id);
-		const { username } = user._doc;
-		res.status(200).json(username);
+		const { username, email } = user._doc;
+		res.status(200).json({ username, email });
 	}
 	catch(err) {
 		next(err);
