@@ -43,7 +43,7 @@ Content-Type: application/json
 	"bedrooms": 2,
 	"furnished": true,
 	"parking": true,
-	"type": "Apartment",
+	"type": "rent",
 	"offer": true,
 	"imageUrls": ["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"],
 	"userRef": "661a9171ab394ed1764e7680"

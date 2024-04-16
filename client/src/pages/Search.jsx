@@ -149,7 +149,7 @@ export default function Search() {
 							<span>Sell</span>
 						</div>
 						<div className="flex items-center gap-1">
-							<input type="checkbox" id="offer" className="w-5 h-5" onChange={handleChange} checked={sidebarData.offer === "true" ? true: false}/>
+							<input type="checkbox" id="offer" className="w-5 h-5" onChange={handleChange} checked={sidebarData.offer}/>
 							<span>Offer</span>
 						</div>
 					</div>
@@ -187,7 +187,7 @@ export default function Search() {
 					)}
 					{!loading && listings.length > 0 && (
 						listings.map((listing, index) => (
-							<ListingItem key={listing._id} listing={listing}/>
+							<ListingItem key={index} listing={listing}/>
 						))
 					)}
 				</div>
