@@ -2,6 +2,7 @@ import { set } from "mongoose";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 
 export default function Search() {
 
@@ -162,8 +163,21 @@ export default function Search() {
 					<button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95">Search</button>
         </form>
       </div>
-      <div>
+      <div className="mx-6">
       	<h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">Listing Results:</h1>
+				<div className="flex flex-row flex-wrap">
+					{!loading && listings.length === 0 && (
+						<p className="text-lg text-slate-700 text-center p-3">No listings found!</p>
+					)}
+					{loading && (
+						<p className="text-lg text-slate-700 text-center p-3">Loading...</p>
+					)}
+					{!loading && listings.length > 0 && (
+						listings.map((listing, index) => (
+							<ListingItem key={listing._id} listing={listing}/>
+						))
+					)}
+				</div>
 			</div>
     </main>
   );
