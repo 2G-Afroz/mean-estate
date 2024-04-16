@@ -18,8 +18,7 @@ export default function Search() {
 	});
 	const [loading, setLoading] = useState(false);
 	const [listings, setListings] = useState([]);
-
-	console.log(listings);
+	const [showMore, setShowMore] = useState(false);
 
 	const handleChange = (e) => {
 		if(e.target.id === "searchTerm") {
@@ -71,6 +70,18 @@ export default function Search() {
 		navigate(`/search?${searchQuery}`);
 	}
 
+	const onShowMoreClick = async () => {
+		const startIndex = listings.length;
+		const urlParam = new URLSearchParams(location.search);
+		urlParam.set('startIndex', startIndex);
+		const searchQuery = urlParam.toString();
+		const res = await fetch(`/api/listing/?${searchQuery}`);
+		const data = await res.json();
+		setListings([...listings, ...data]);
+		if(data.length < 9)
+			setShowMore(false);
+	}
+
 	useEffect(() => {
 		const urlSearchParams = new URLSearchParams(location.search);
 		const searchTerm = urlSearchParams.get("searchTerm");
@@ -97,6 +108,8 @@ export default function Search() {
 			const searchQuery = urlSearchParams.toString();
 			const response = await fetch(`/api/listing?${searchQuery}`);
 			const data = await response.json();
+			if(data.length > 8)
+				setShowMore(true);
 			setLoading(false);
 			setListings(data);
 		};
@@ -178,6 +191,13 @@ export default function Search() {
 						))
 					)}
 				</div>
+				{showMore && (
+					<button onClick={onShowMoreClick}
+					className="text-green-700 text-center w-full"
+					>
+						show More...
+					</button>
+				)}
 			</div>
     </main>
   );
